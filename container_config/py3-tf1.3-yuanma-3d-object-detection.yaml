@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: py3-tf1point3-yuanma-3d-object-detection
+  namespace: inf-stud
+spec:
+  selector:
+    matchLabels:
+      app: py3-tf1point3-yuanma-3d-object-detection
+  replicas: 1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: py3-tf1point3-yuanma-3d-object-detection
+    spec:
+      containers:
+      - args:
+        - bash
+        image: tensorflow/tensorflow:1.3.0-gpu-py3
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        imagePullPolicy: IfNotPresent
+        name: py3-tf1point3-yuanma-3d-object-detection
+        resources:
+          limits:
+            nvidia.com/gpu: "1"
+        volumeMounts:
+          - mountPath: "/home/yuanma"
+            name: pvc-yuanma-3d-object-detection
+      volumes:
+        - name: pvc-yuanma-3d-object-detection
+          persistentVolumeClaim:
+            claimName: pvc-yuanma-3d-object-detection
