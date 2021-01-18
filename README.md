@@ -16,6 +16,6 @@ kubectl apply -f */kubectl/container_config/py3-tf1.3-yuanma-3d-object-detection
 # Startinf a new pvc(Persistent Volume Claim) by configura file
 kubectl apply -f */kubctl/storage_config/pvc-yuanma-3d-object-detection.yaml
 
-# create a service expose service's port to container's virtual target-port
+# create a service which expose deployment's target-port(8000) to container's virtual ip's port(80), this virtual ip can not be access in outside, but in kubenetes networks. 
 kubectl expose deployment d1 --port=80 --target-port=8000 --type=NodePort
 
