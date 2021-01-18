@@ -19,3 +19,5 @@ kubectl apply -f */kubctl/storage_config/pvc-yuanma-3d-object-detection.yaml
 # create a service which expose deployment's target-port(8000) to container's virtual ip's port(80), this virtual ip can not be access in outside, but in kubenetes networks. 
 kubectl expose deployment d1 --port=80 --target-port=8000 --type=NodePort
 
+# project localhost:8888 to kubenetes's node (have deployment d1) virtual ip:80
+kubectl port-forward --address localhost d1-xxx 8888:80
